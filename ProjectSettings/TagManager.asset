@@ -41,6 +41,9 @@ TagManager:
   - name: Background
     uniqueID: 1026565617
     locked: 0
+  - name: Ground
+    uniqueID: 458435127
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

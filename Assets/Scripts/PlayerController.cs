@@ -6,23 +6,40 @@ using UnityEngine.InputSystem;
 
 // 2D Player Controller
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
     Vector2 moveInput;
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
+    public float airSpeed = 3f;
+    TouchingDirections touchingDirections;
+    public float jumpImpulse = 10f;
 
     public float CurrentSpeed { get 
         {
-            if (IsMoving)
+            if (IsMoving && !touchingDirections.IsOnWall)
             {
-                if(IsRunning)
+                if (touchingDirections.IsGrounded)
                 {
-                    return runSpeed;
+                    if (IsRunning)
+                    {
+                        return runSpeed;
+                    }
+                    else
+                    {
+                        return walkSpeed;
+                    }
                 } else
                 {
-                    return walkSpeed;
+                    if (IsRunning)
+                    {
+                        return airSpeed + 3;
+                    }
+                    else
+                    {
+                        return airSpeed;
+                    }
                 }
             }else
             {
@@ -33,7 +50,7 @@ public class PlayerController : MonoBehaviour
     }
 
     Rigidbody2D rb;
-    Animator anim;
+    Animator animator;
     [SerializeField]
     private bool _isMoving = false;
 
@@ -47,11 +64,11 @@ public class PlayerController : MonoBehaviour
             _isMoving = value;
             if (value)
             {
-                anim.SetBool("isMoving", true);
+                animator.SetBool(AnimationStrings.isMoving, true);
             }
             else
             {
-                anim.SetBool("isMoving", false);
+                animator.SetBool(AnimationStrings.isMoving, false);
             }
         }
     }
@@ -67,16 +84,18 @@ public class PlayerController : MonoBehaviour
             _isRunning = value;
             if (value)
             {
-                anim.SetBool("isRunning", true);
+                animator.SetBool(AnimationStrings.isRunning, true);
             }
             else
             {
-                anim.SetBool("isRunning", false);
+                animator.SetBool(AnimationStrings.isRunning, false);
             }
         } 
     }
 
     public bool _isFacingRight = true;
+    
+
     public bool IsFacingRight { get { return _isFacingRight; } private set {
             if (_isFacingRight != value)
             {
@@ -89,7 +108,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        touchingDirections = GetComponent<TouchingDirections>();
     }
 
     
@@ -107,7 +127,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-            rb.velocity = new Vector2(moveInput.x * CurrentSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(moveInput.x * CurrentSpeed, rb.velocity.y);
+
+        animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -141,5 +163,20 @@ public class PlayerController : MonoBehaviour
         {
             IsRunning = false;
         } 
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        //TODO check if alive as well
+        if (context.started && touchingDirections.IsGrounded)
+        {
+            animator.SetTrigger(AnimationStrings.jump);
+            Jump();
+        }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
     }
 }
