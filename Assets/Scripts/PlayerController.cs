@@ -18,32 +18,33 @@ public class PlayerController : MonoBehaviour
 
     public float CurrentSpeed { get 
         {
-            if (IsMoving && !touchingDirections.IsOnWall)
+            if(CanMove)
             {
-                if (touchingDirections.IsGrounded)
+                if (IsMoving && !touchingDirections.IsOnWall)
                 {
-                    if (IsRunning)
+                    if (touchingDirections.IsGrounded)
                     {
-                        return runSpeed;
-                    }
-                    else
-                    {
-                        return walkSpeed;
-                    }
-                } else
-                {
-                    if (IsRunning)
-                    {
-                        return airSpeed + 3;
+                        if (IsRunning)
+                        {
+                            return runSpeed;
+                        }
+                        else
+                        {
+                            return walkSpeed;
+                        }
                     }
                     else
                     {
                         return airSpeed;
                     }
                 }
-            }else
+                else
+                {
+                    // Not moving
+                    return 0;
+                }
+            } else
             {
-                // Not moving
                 return 0;
             }
         } 
@@ -105,6 +106,8 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
+    public bool CanMove { get { return animator.GetBool(AnimationStrings.canMove); } }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -112,18 +115,6 @@ public class PlayerController : MonoBehaviour
         touchingDirections = GetComponent<TouchingDirections>();
     }
 
-    
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void FixedUpdate()
     {
@@ -168,9 +159,9 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         //TODO check if alive as well
-        if (context.started && touchingDirections.IsGrounded)
+        if (context.started && touchingDirections.IsGrounded && CanMove)
         {
-            animator.SetTrigger(AnimationStrings.jump);
+            animator.SetTrigger(AnimationStrings.jumpTrigger);
             Jump();
         }
     }
@@ -178,5 +169,13 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            animator.SetTrigger(AnimationStrings.attackTrigger);
+        }
     }
 }

@@ -927,8 +927,8 @@ GameObject:
   - component: {fileID: 1438589347}
   - component: {fileID: 1438589349}
   - component: {fileID: 1438589348}
-  m_Layer: 0
-  m_Name: Tilemap
+  m_Layer: 6
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2306,6 +2306,10 @@ PrefabInstance:
       propertyPath: jumpImpulse
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5076057508537079130, guid: bba26bfbe74b6f143b954c9bf4d6854f, type: 3}
+      propertyPath: castFilter.layerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7904064372653265987, guid: bba26bfbe74b6f143b954c9bf4d6854f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4110082
@@ -2351,6 +2355,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bba26bfbe74b6f143b954c9bf4d6854f, type: 3}
+--- !u!1001 &7054500685524434367
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 412149973474175988, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_Name
+      value: KnightEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021765884549370198, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_Size.y
+      value: 2.390079
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021765884549370198, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.034841776
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3141632
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681588959812616303, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502027184688023908, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: castFilter.useOutsideDepth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502027184688023908, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
+      propertyPath: castFilter.layerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dad6044f9b921954aa1ddf88892315cc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2361,3 +2438,4 @@ SceneRoots:
   - {fileID: 529257399645014246}
   - {fileID: 1554766939}
   - {fileID: 74369602}
+  - {fileID: 7054500685524434367}
